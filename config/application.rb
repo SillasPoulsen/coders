@@ -19,21 +19,8 @@ module Coderstravel
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    # Whitelist assets to be precompiled.
-    #
-    # This is a workaround for an issue where the precompilation process will
-    # fail on extensionless files (README, LICENSE, etc.)
-    # See: https://github.com/sstephenson/sprockets/issues/347
-    precompile_whitelist = %w(
-      .html .erb .haml
-      .png  .jpg .gif .jpeg .ico
-      .eot  .otf .svc .woff .ttf
-      .svg
-    )
-    config.assets.precompile.shift
-    config.assets.precompile.unshift -> (path) {
-      (extension = File.extname(path)).present? and extension.in?(precompile_whitelist)
-    }
+    #Required for Heroku
+    config.assets.initialize_on_precompile = false
 
   end
 end
