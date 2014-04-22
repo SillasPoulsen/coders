@@ -1,0 +1,21 @@
+html { 
+background: url(http://www.centaf.af.mil/shared/media/photodb/photos/100422-F-5788W-001.jpg) no-repeat center center fixed; 
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+} 
+
+$navbar-inverse-bg: #34495e;
+$navbar-inverse-link-color: white;
+$brand-primary: #f39c12;
+$jumbotron-bg: #ecf0f1;
+@import 'bootstrap';
+
+.center {
+     text-align: center;
+}
+
+.navbar-brand {
+     font-weight: bold;
+}
