@@ -1,9 +1,10 @@
-<h1>Listing jobs</h1>
+<h1>Listing Jobs</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Discription</th>
+      <th>Description</th>
+      <th>User's email</th>
       <th></th>
       <th></th>
       <th></th>
@@ -13,15 +14,19 @@
   <tbody>
     <% @jobs.each do |job| %>
       <tr>
-        <td><%= job.discription %></td>
-        <td><%= link_to 'Show', job %></td>
-        <td><%= link_to 'Edit', edit_job_path(job) %></td>
-        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= job.description %></td>
+        <td><%= job.user.email if job.user %></td>
+        <td><%= link_to 'Show', job_path(job) %></td>
+        <% if job.user == current_user %>
+          <td><%= link_to 'Edit', edit_job_path(job) %></td>
+          <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Job', new_job_path %>
+<% if user_signed_in? %>
+  <%= link_to 'New Job', new_job_path %>
+<% end %>

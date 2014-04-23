@@ -1,22 +1,24 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
-
+  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  
   def index
-    @jobs = Job.all
+    @job = Job.all
   end
 
   def show
   end
 
   def new
-    @job = Job.new
+    @job = current_user.jobs.build
   end
 
   def edit
   end
 
   def create
-    @job = Job.new(job_params)
+    @job = current_user.jobs.build(job_params)
     if @job.save
       redirect_to @job, notice: 'Job was successfully created.'
     else
@@ -38,13 +40,19 @@ class JobsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_job
-      @job = Job.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_job
+    @job = Job.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def pin_params
-      params.require(:job).permit(:description)
-    end
+  def correct_user
+  @job = current_user.jobs.find_by(id: params[:id])
+    redirect_to jobs_path, notice: "Not autorized ti edit this Job" if @job.nil?
+  end
+
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def job_params
+    params.require(:job).permit(:description, :image)
+  end
 end
