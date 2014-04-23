@@ -14,7 +14,7 @@
   <tbody>
     <% @jobs.each do |job| %>
       <tr>
-        <td><%= job.description %></td>
+        <td><%= job.discription %></td>
         <td><%= job.user.email if job.user %></td>
         <td><%= link_to 'Show', job_path(job) %></td>
         <% if job.user == current_user %>
