@@ -9,7 +9,7 @@ class JobsController < ApplicationController
   end
 
   def new
-    @job = job.new
+    @job = Job.new
   end
 
   def edit
