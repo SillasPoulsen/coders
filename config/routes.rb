@@ -1,4 +1,6 @@
 Coderstravel::Application.routes.draw do
+  resources :jobs
+
   devise_for :users
   root "pages#home"
   get "about"=>"pages#about"
